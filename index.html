@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You 💖</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Comic Sans MS', 'Segoe UI', sans-serif;
+        }
+
+        body {
+            height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background: linear-gradient(135deg,
+                    #ffd6e7,
+                    #dff9fb,
+                    #ffeaa7);
+
+            overflow: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 380px;
+
+            background: rgba(255, 255, 255, 0.92);
+
+            padding: 25px;
+
+            border-radius: 35px;
+
+            text-align: center;
+
+            box-shadow: 0 15px 40px rgba(255, 182, 193, 0.4);
+        }
+
+        /* GIF */
+
+        .gif {
+            width: 120px;
+
+            margin-bottom: 15px;
+        }
+
+        /* TOP SENTENCE */
+
+        .title {
+            font-size: 1.8rem;
+
+            color: #ff6b81;
+
+            font-weight: bold;
+
+            margin-bottom: 20px;
+
+            line-height: 1.4;
+        }
+
+        /* BUTTON AREA */
+
+        .buttons {
+            position: relative;
+
+            height: 120px;
+
+            margin-top: 10px;
+        }
+
+        button {
+            padding: 12px 28px;
+
+            border: none;
+
+            border-radius: 30px;
+
+            font-size: 1rem;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+
+            color: white;
+        }
+
+        /* YES */
+
+        #yesBtn {
+            background: linear-gradient(135deg,
+                    #ff9ff3,
+                    #feca57);
+
+            box-shadow: 0 8px 20px rgba(255, 105, 180, 0.4);
+
+            margin-right: 15px;
+        }
+
+        /* NO */
+
+        #noBtn {
+            position: absolute;
+
+            left: 200px;
+            top: 0;
+
+            background: linear-gradient(135deg,
+                    #74b9ff,
+                    #a29bfe);
+
+            box-shadow: 0 8px 20px rgba(116, 185, 255, 0.4);
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        /* FINAL PAGE */
+
+        .final-box {
+            display: none;
+        }
+
+        .final-photo {
+            width: 100%;
+
+            height: 320px;
+
+            object-fit: cover;
+
+            border-radius: 25px;
+
+            border: 5px solid white;
+
+            box-shadow: 0 10px 25px rgba(255, 182, 193, 0.5);
+        }
+
+        .final-text {
+            margin-top: 20px;
+
+            color: #ff6b81;
+
+            font-size: 1.2rem;
+
+            line-height: 1.7;
+
+            font-weight: bold;
+        }
+
+        /* MOBILE */
+
+        @media(max-width: 768px) {
+
+            .container {
+                max-width: 340px;
+                padding: 20px;
+            }
+
+            .gif {
+                width: 90px;
+            }
+
+            .title {
+                font-size: 1.4rem;
+            }
+
+            .final-photo {
+                height: 250px;
+            }
+
+            button {
+                font-size: 0.8rem;
+                padding: 10px 20px;
+            }
+
+            #noBtn {
+                left: 160px;
+            }
+
+            .final-text {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- FIRST PAGE -->
+
+        <div id="firstPage">
+
+            <!-- GIF -->
+            <img src="gif.gif" class="gif" alt="Cute Gif">
+
+            <!-- SENTENCE -->
+            <div class="title">
+                💕စိတ်ဆိုးနေတုန်းလား? 💖
+            </div>
+
+            <!-- BUTTONS -->
+            <div class="buttons">
+
+                <button id="yesBtn" onclick="showFinalPage()">
+                    ဆိုးတယ် 💕
+                </button>
+
+                <button id="noBtn">
+                    မဆိုးပါဘူး 💔
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- FINAL PAGE -->
+
+        <div class="final-box" id="finalPage">
+
+            <!-- PHOTO -->
+            <img src="2.jpg" class="final-photo" alt="Cute Couple">
+
+            <!-- FINAL SENTENCE -->
+            <div class="final-text">
+                တောင်းပန်ပါတယ် <br><br>
+
+                စိတ်မဆိုးပါနဲ့တော့ <br><br>
+
+                အခုကစပြီးတော့<br>
+                💕ပိုချစ်ပြီးတော့ ပိုဂရုစိုက်ပေးပါမယ် 💕
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        const noBtn = document.getElementById("noBtn");
+
+        let clickCount = 0;
+
+        noBtn.addEventListener("click", () => {
+
+            clickCount++;
+
+            /* AFTER 4 CLICKS */
+
+            if (clickCount >= 4) {
+
+                noBtn.innerHTML = "ဆိုးတယ် 💕";
+
+                noBtn.style.background =
+                    "linear-gradient(135deg,#ff9ff3,#feca57)";
+
+                noBtn.onclick = showFinalPage;
+
+                return;
+            }
+
+            /* MOVE BUTTON */
+
+            const randomX =
+                Math.floor(Math.random() * 220);
+
+            const randomY =
+                Math.floor(Math.random() * 70);
+
+            noBtn.style.left = randomX + "px";
+            noBtn.style.top = randomY + "px";
+        });
+
+        function showFinalPage() {
+
+            document.getElementById("firstPage").style.display = "none";
+
+            document.getElementById("finalPage").style.display = "block";
+        }
+
+    </script>
+
+</body>
+
+</html>
